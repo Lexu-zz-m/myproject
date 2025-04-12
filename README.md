@@ -51,7 +51,7 @@ A secure and user-friendly Django-based e-commerce web application built for a l
 
 ```bash
 # Clone the repository
-git clone https://github.com/MarcKyle/moni-project.git
+git clone https://github.com/Lexu-zz-m/myproject.git
 cd myproject
 
 # Install dependencies
