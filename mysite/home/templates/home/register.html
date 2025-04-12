@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Account - RFM Ads & Graphix Design</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .logo-section {
+            flex: 1;
+            background-color: #DFDFDF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .form-section {
+            flex: 1;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 5%;
+        }
+        
+        .form-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            color: #026937;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            color: #888;
+            margin-bottom: 30px;
+        }
+        
+        .form-field {
+            margin-bottom: 15px;
+            width: 100%;
+        }
+        
+        .form-field input {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            background-color: #e8f8ef;
+            font-size: 16px;
+            outline: none;
+        }
+        
+        .password-field {
+            position: relative;
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #026937;
+        }
+        
+        .signup-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: #026937;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+        
+        .signup-btn:hover {
+            background-color: #015329;
+        }
+        
+        .login-text {
+            text-align: center;
+            margin-top: 20px;
+            color: #888;
+        }
+        
+        .login-text a {
+            color: #026937;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .messages {
+            color: red;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-section">
+        <!-- Replace with the path to your full logo + background image -->
+        <img src="/static/images/TRY23.png" alt="RFM Ads & Graphix Design" class="logo-image">
+    </div>
+    
+    <div class="form-section">
+        <div class="form-container">
+            <h1>Create Account</h1>
+            <p class="subtitle">Join us! Please create your account.</p>
+            
+            {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+            <form method="POST">
+                {% csrf_token %}
+                
+                <div class="form-field">
+                    <input type="text" name="full_name" placeholder="Full Name" required>
+                </div>
+                
+                <div class="form-field">
+                    <input type="email" name="email" placeholder="Email Address" required>
+                </div>
+                
+                <div class="form-field password-field">
+                    <input type="password" name="password1" id="password1" placeholder="Create Password" required>
+                    <span class="password-toggle" onclick="togglePassword('password1')">
+                        👁️
+                    </span>
+                </div>
+                
+                <div class="form-field password-field">
+                    <input type="password" name="password2" id="password2" placeholder="Confirm Password" required>
+                    <span class="password-toggle" onclick="togglePassword('password2')">
+                        👁️
+                    </span>
+                </div>
+                
+                <button type="submit" class="signup-btn">Sign Up</button>
+            </form>
+            
+            <p class="login-text">Already have an account? <a href="{% url 'login' %}">Log in.</a></p>
+        </div>
+    </div>
+    
+    <script>
+        function togglePassword(inputId) {
+            const passwordInput = document.getElementById(inputId);
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+            } else {
+                passwordInput.type = "password";
+            }
+        }
+    </script>
+</body>
+</html>
